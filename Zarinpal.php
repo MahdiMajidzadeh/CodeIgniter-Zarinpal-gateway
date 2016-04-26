@@ -9,8 +9,9 @@ class Zarinpal {
 	private $url;
 	private $ERR;
 	private $authority;
+	private $refid;
 
-	public function start($merchant_id , $amount, $desc, $call_back, $moble = NULL, $email = NULL){
+	public function request($merchant_id , $amount, $desc, $call_back, $moble = NULL, $email = NULL){
 
 		$client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl'); 
 		$client->soap_defencoding = 'UTF-8';
@@ -56,6 +57,33 @@ class Zarinpal {
 
 	public function get_authority(){
 		return $this->authority;
+	}
+
+	public function verify($merchant_id , $amount, $authority){
+
+		$client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl'); 
+		$client->soap_defencoding = 'UTF-8';
+
+		$data = array(
+			'MerchantID' 	=> $merchant_id,
+			'Amount' 		=> $amount,
+			'Authority' 	=> $authority
+			);
+
+		$result = $client->call('PaymentVerification', array($data));
+
+		if($result['Status'] == 100){
+			$this->refid = $result['RefID'];
+			return TRUE;
+		}
+		else{
+			$this->ERR = $result['Status'];
+			return FALSE;
+		}
+	}
+
+	public function get_ref_id(){
+		return $this->refid;
 	}
 
 }
