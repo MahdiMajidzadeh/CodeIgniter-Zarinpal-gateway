@@ -42,4 +42,20 @@ class Zarinpal {
 		}
 	}
 
+	public function redirect(){
+		$CI =& get_instance();
+		if(!function_exists('redirect')){
+			$CI->load->helper('url');
+		}
+		redirect($this->url);
+	}
+
+	public function get_error(){
+		return $this->ERR;
+	}
+
+	public function get_authority(){
+		return $this->authority;
+	}
+
 }
