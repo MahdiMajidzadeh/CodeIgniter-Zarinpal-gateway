@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * CodeIgniter ZarinPal getway library
+ *
+ * @author              Mahdi Majidzadeh (http://restro.ir)
+ * @license             GNU Public License 2.0
+ * @package             ZarinPal
+ */
+
 if (!class_exists('nusoap_client')) 
 	require_once('nusoap.php');
 
@@ -11,7 +19,7 @@ class Zarinpal {
 	private $authority;
 	private $refid;
 
-	public function request($merchant_id , $amount, $desc, $call_back, $moble = NULL, $email = NULL){
+	public function request($merchant_id , $amount, $desc, $call_back, $mobile = NULL, $email = NULL){
 
 		$client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl'); 
 		$client->soap_defencoding = 'UTF-8';
