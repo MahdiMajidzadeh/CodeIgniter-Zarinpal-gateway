@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Codeigniter-zarinpal-getway by IranCI</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Codeigniter-zarinpal-getway</h1>
+        <p>Codeigniter library for Iranian getway, Zarinpal</p>
+
+        <p class="view"><a href="https://github.com/IranCI/CodeIgniter-Zarinpal-getway">View the Project on GitHub <small>IranCI/CodeIgniter-Zarinpal-getway</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/IranCI/CodeIgniter-Zarinpal-getway/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/IranCI/CodeIgniter-Zarinpal-getway/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/IranCI/CodeIgniter-Zarinpal-getway">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="codeigniter-zarinpal-getway" class="anchor" href="#codeigniter-zarinpal-getway" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CodeIgniter-Zarinpal-getway</h1>
+
+<p>Codeigniter library for Iranian getway, <a href="https://www.zarinpal.com/">Zarinpal</a></p>
+
+<h2>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>how to install</h2>
+
+<p>Copy <code>Zarinpal.php</code> and <code>nusoap.php</code> to <code>application/libraries</code> of your own project.</p>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>how to use</h2>
+
+<p>For sending user to getway:</p>
+
+<pre><code>$this-&gt;zaringpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
+</code></pre>
+
+<p>full code is:</p>
+
+<pre><code>if($this-&gt;zaringpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
+    $authority = $this-&gt;zarinpal-&gt;get_authority();
+    // do database 
+    $this-&gt;zarinpal-&gt;redirect();
+}
+else{
+    $error = $this-&gt;zarinpal-&gt;get_error();
+}
+</code></pre>
+
+<p>For verify user payment:</p>
+
+<pre><code>$this-&gt;zaringpal-&gt;verify($merchant_id , $amount, $authority);
+</code></pre>
+
+<p>full code is:</p>
+
+<pre><code>if($_GET['Status'] == 'OK'){
+    if($this-&gt;zaringpal-&gt;verify($merchant_id , $amount, $authority)){
+        $refid = $this-&gt;zarinpal-&gt;get_ref_id();
+        // do database 
+    }
+    else{
+        $error = $this-&gt;zarinpal-&gt;get_error();
+    }
+}
+else{
+    //use cancel payment
+}
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/IranCI">IranCI</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
