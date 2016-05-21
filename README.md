@@ -42,3 +42,6 @@ else{
 
 ##Contributor
 - Mahdi Majidzadeh ([github](https://github.com/MahdiMajidzadeh))
+
+## Donate
+You can use [payping](https://www.payping.ir/Mahdimajidzadeh) to donate contributor
