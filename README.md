@@ -7,11 +7,11 @@ Copy `Zarinpal.php` and `nusoap.php` to `application/libraries` of your own proj
 ##how to use
 For sending user to getway:
 ```
-$this->zaringpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
+$this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
 ```
 full code is:
 ```
-if($this->zaringpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
+if($this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
     $authority = $this->zarinpal->get_authority();
     // do database 
     $this->zarinpal->redirect();
@@ -22,12 +22,12 @@ else{
 ```
 For verify user payment:
 ```
-$this->zaringpal->verify($merchant_id , $amount, $authority);
+$this->zarinpal->verify($merchant_id , $amount, $authority);
 ```
 full code is:
 ```
 if($_GET['Status'] == 'OK'){
-    if($this->zaringpal->verify($merchant_id , $amount, $authority)){
+    if($this->zarinpal->verify($merchant_id , $amount, $authority)){
         $refid = $this->zarinpal->get_ref_id();
         // do database 
     }
@@ -42,6 +42,3 @@ else{
 
 ##Contributor
 - Mahdi Majidzadeh ([github](https://github.com/MahdiMajidzadeh))
-
-## Donate
-You can use [payping](https://www.payping.ir/Mahdimajidzadeh) to donate contributor
