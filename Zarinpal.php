@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter ZarinPal getway library
  *
- * @author              Mahdi Majidzadeh (http://restro.ir)
+ * @author              Mahdi Majidzadeh (http://majidzadeh.ir)
  * @license             GNU Public License 2.0
  * @package             ZarinPal
 */
@@ -19,9 +19,18 @@ class Zarinpal {
 	private $authority;
 	private $refid;
 
+	private $url_wsdl;
+	private $url_pay;
+
+	public function __construct(){
+		
+		$url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+		$url_pay = 'https://www.zarinpal.com/pg/StartPay/';
+	}
+
 	public function request($merchant_id , $amount, $desc, $call_back, $mobile = NULL, $email = NULL){
 
-		$client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl'); 
+		$client = new nusoap_client($this->url_wsdl, 'wsdl'); 
 		$client->soap_defencoding = 'UTF-8';
 
 		$data = array(
@@ -42,7 +51,7 @@ class Zarinpal {
 
 		if($result['Status'] == 100){
 			$this->authority = $result['Authority'];
-			$this->url = 'https://www.zarinpal.com/pg/StartPay/'.$result['Authority'];
+			$this->url = $this->url_pay.$result['Authority'];
 			return TRUE;
 		}
 		else{
@@ -92,6 +101,12 @@ class Zarinpal {
 
 	public function get_ref_id(){
 		return $this->refid;
+	}
+
+	public function sandbox(){
+
+		$url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
+		$url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
 	}
 
 }
