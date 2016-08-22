@@ -1,34 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Codeigniter-zarinpal-getway by MahdiMajidzadeh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>Codeigniter-zarinpal-getway by MahdiMajidzadeh</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
+    <header>
+      <div class="inner">
         <h1>Codeigniter-zarinpal-getway</h1>
-        <p>Codeigniter library for Iranian getway, Zarinpal</p>
+        <h2>Codeigniter library for Iranian getway, Zarinpal</h2>
+        <a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-        <p class="view"><a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway">View the Project on GitHub <small>MahdiMajidzadeh/CodeIgniter-Zarinpal-getway</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="codeigniter-zarinpal-getway" class="anchor" href="#codeigniter-zarinpal-getway" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CodeIgniter-Zarinpal-getway</h1>
 
 <p>Codeigniter library for Iranian getway, <a href="https://www.zarinpal.com/">Zarinpal</a></p>
@@ -43,12 +43,12 @@
 
 <p>For sending user to getway:</p>
 
-<pre><code>$this-&gt;zaringpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
+<pre><code>$this-&gt;zarinpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
 </code></pre>
 
 <p>full code is:</p>
 
-<pre><code>if($this-&gt;zaringpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
+<pre><code>if($this-&gt;zarinpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
     $authority = $this-&gt;zarinpal-&gt;get_authority();
     // do database 
     $this-&gt;zarinpal-&gt;redirect();
@@ -60,13 +60,13 @@ else{
 
 <p>For verify user payment:</p>
 
-<pre><code>$this-&gt;zaringpal-&gt;verify($merchant_id , $amount, $authority);
+<pre><code>$this-&gt;zarinpal-&gt;verify($merchant_id , $amount, $authority);
 </code></pre>
 
 <p>full code is:</p>
 
 <pre><code>if($_GET['Status'] == 'OK'){
-    if($this-&gt;zaringpal-&gt;verify($merchant_id , $amount, $authority)){
+    if($this-&gt;zarinpal-&gt;verify($merchant_id , $amount, $authority)){
         $refid = $this-&gt;zarinpal-&gt;get_ref_id();
         // do database 
     }
@@ -85,18 +85,25 @@ else{
 <ul>
 <li>Mahdi Majidzadeh (<a href="https://github.com/MahdiMajidzadeh">github</a>)</li>
 </ul>
+        </section>
 
-<h2>
-<a id="donate" class="anchor" href="#donate" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Donate</h2>
+        <aside id="sidebar">
+          <a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-<p>You can use <a href="https://www.payping.ir/Mahdimajidzadeh">payping</a> to donate contributor</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/MahdiMajidzadeh">MahdiMajidzadeh</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/MahdiMajidzadeh/CodeIgniter-Zarinpal-getway"></a> is maintained by <a href="https://github.com/MahdiMajidzadeh">MahdiMajidzadeh</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+  
   </body>
 </html>
