@@ -1,5 +1,5 @@
-# CodeIgniter-Zarinpal-getway
-Codeigniter library for Iranian getway, [Zarinpal](https://www.zarinpal.com/)
+# CodeIgniter-Zarinpal-gateway
+Codeigniter library for Iranian gateway, [Zarinpal](https://www.zarinpal.com/)
 
 ##how to install
 Copy `Zarinpal.php` and `nusoap.php` to `application/libraries` of your own project.
@@ -7,10 +7,10 @@ Copy `Zarinpal.php` and `nusoap.php` to `application/libraries` of your own proj
 ##how to use
 First, load library:
 ```
-$this->load->library('telegram');
+$this->load->library('zarinpal');
 ```
 
-For sending user to getway:
+For sending user to gateway:
 ```
 $this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
 ```
