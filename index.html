@@ -41,12 +41,17 @@
 <h2>
 <a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>how to use</h2>
 
+<p>First, load library:</p>
+
+<pre><code>$this-&gt;load-&gt;library('telegram');
+</code></pre>
+
 <p>For sending user to getway:</p>
 
 <pre><code>$this-&gt;zarinpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
 </code></pre>
 
-<p>full code is:</p>
+<p>Full code is:</p>
 
 <pre><code>if($this-&gt;zarinpal-&gt;request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
     $authority = $this-&gt;zarinpal-&gt;get_authority();
@@ -63,7 +68,7 @@ else{
 <pre><code>$this-&gt;zarinpal-&gt;verify($merchant_id , $amount, $authority);
 </code></pre>
 
-<p>full code is:</p>
+<p>Full code is:</p>
 
 <pre><code>if($_GET['Status'] == 'OK'){
     if($this-&gt;zarinpal-&gt;verify($merchant_id , $amount, $authority)){
@@ -77,6 +82,14 @@ else{
 else{
     //use cancel payment
 }
+</code></pre>
+
+<h2>
+<a id="sandbox" class="anchor" href="#sandbox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sandbox</h2>
+
+<p>For test for script, you can turn on sandbox mode:</p>
+
+<pre><code>$this-&gt;zarinpal-&gt;sandbox();
 </code></pre>
 
 <h2>
