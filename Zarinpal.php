@@ -24,7 +24,7 @@ class Zarinpal
     private $url_wsdl;
     private $url_pay;
 
-    public function __construct()
+    public function initialize()
     {
         $url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
         $url_pay = 'https://www.zarinpal.com/pg/StartPay/';
@@ -39,10 +39,10 @@ class Zarinpal
             'MerchantID'     => $merchant_id,
             'Amount'         => $amount,
             'Description'    => $desc,
-            'CallbackURL'    => $call_back,
-            ];
+            'CallbackURL'    => $call_back
+        ];
 
-        if ($phone) {
+        if ($mobile) {
             $data['Mobile'] = $mobile;
         }
         if ($email) {
@@ -50,7 +50,7 @@ class Zarinpal
         }
 
         $result = $client->call('PaymentRequest', [$data]);
-
+        
         if ($result['Status'] == 100) {
             $this->authority = $result['Authority'];
             $this->url = $this->url_pay.$result['Authority'];
@@ -69,6 +69,7 @@ class Zarinpal
         if (!function_exists('redirect')) {
             $CI->load->helper('url');
         }
+
         redirect($this->url);
     }
 
@@ -84,14 +85,14 @@ class Zarinpal
 
     public function verify($merchant_id, $amount, $authority)
     {
-        $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+        $client = new nusoap_client($this->url_wsdl, 'wsdl');
         $client->soap_defencoding = 'UTF-8';
 
         $data = [
             'MerchantID'    => $merchant_id,
             'Amount'        => $amount,
             'Authority'     => $authority,
-            ];
+        ];
 
         $result = $client->call('PaymentVerification', [$data]);
 
@@ -113,7 +114,7 @@ class Zarinpal
 
     public function sandbox()
     {
-        $url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
-        $url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
+        $this->url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
+        $this->url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
     }
 }
