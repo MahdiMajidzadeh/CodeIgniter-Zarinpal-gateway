@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter ZarinPal getway library
@@ -9,10 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package             ZarinPal
 */
 
-if (!class_exists('nusoap_client')) 
-	require_once('nusoap.php');
+if (!class_exists('nusoap_client'))
+	require_once 'nusoap.php';
 
-class Zarinpal {
+class Zarinpal
+{
 
 	private $url;
 	private $ERR;
@@ -22,89 +23,95 @@ class Zarinpal {
 	private $url_wsdl;
 	private $url_pay;
 
-	public function __construct(){
-		
+	public function __construct()
+	{
 		$url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
 		$url_pay = 'https://www.zarinpal.com/pg/StartPay/';
 	}
 
-	public function request($merchant_id , $amount, $desc, $call_back, $mobile = NULL, $email = NULL){
-
+	public function request($merchant_id , $amount, $desc, $call_back, $mobile = NULL, $email = NULL)
+	{
 		$client = new nusoap_client($this->url_wsdl, 'wsdl'); 
 		$client->soap_defencoding = 'UTF-8';
 
-		$data = array(
+		$data = [
 			'MerchantID' 	=> $merchant_id,
 			'Amount' 		=> $amount,
 			'Description' 	=> $desc,
 			'CallbackURL' 	=> $call_back
-			);
+			];
 		
-		if($phone){
+		if ($phone) {
 			$data['Mobile'] = $mobile;
 		}
-		if($email){
+		if ($email) {
 			$data['Email'] = $email;
 		}	
 
-		$result = $client->call('PaymentRequest', array($data));
+		$result = $client->call('PaymentRequest', [$data]);
 
-		if($result['Status'] == 100){
+		if ($result['Status'] == 100) {
 			$this->authority = $result['Authority'];
 			$this->url = $this->url_pay.$result['Authority'];
-			return TRUE;
-		}
-		else{
+
+			return true;
+		} else {
 			$this->ERR = $result['Status'];
-			return FALSE;
+
+			return false;
 		}
 	}
 
-	public function redirect(){
+	public function redirect()
+	{
 		$CI =& get_instance();
-		if(!function_exists('redirect')){
+		if (!function_exists('redirect')) {
 			$CI->load->helper('url');
 		}
 		redirect($this->url);
 	}
 
-	public function get_error(){
+	public function get_error()
+	{
 		return $this->ERR;
 	}
 
-	public function get_authority(){
+	public function get_authority()
+	{
 		return $this->authority;
 	}
 
-	public function verify($merchant_id , $amount, $authority){
-
+	public function verify($merchant_id , $amount, $authority)
+	{
 		$client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl'); 
 		$client->soap_defencoding = 'UTF-8';
 
-		$data = array(
+		$data = [
 			'MerchantID' 	=> $merchant_id,
 			'Amount' 		=> $amount,
 			'Authority' 	=> $authority
-			);
+			];
 
-		$result = $client->call('PaymentVerification', array($data));
+		$result = $client->call('PaymentVerification', [$data]);
 
-		if($result['Status'] == 100){
+		if ($result['Status'] == 100) {
 			$this->refid = $result['RefID'];
-			return TRUE;
-		}
-		else{
+
+			return true;
+		} else {
 			$this->ERR = $result['Status'];
-			return FALSE;
+			
+			return false;
 		}
 	}
 
-	public function get_ref_id(){
+	public function get_ref_id()
+	{
 		return $this->refid;
 	}
 
-	public function sandbox(){
-
+	public function sandbox()
+	{
 		$url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
 		$url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
 	}
