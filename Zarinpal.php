@@ -59,8 +59,8 @@ class Zarinpal
         $client->soap_defencoding = 'UTF-8';
 
         $data = [
-            'MerchantID' => $merchant_id,
-            'Amount' => $amount,
+            'MerchantID'  => $merchant_id,
+            'Amount'      => $amount,
             'Description' => $desc,
             'CallbackURL' => $call_back,
         ];
@@ -76,7 +76,7 @@ class Zarinpal
 
         if ($result['Status'] == 100) {
             $this->authority = $result['Authority'];
-            $this->url = $this->url_pay . $result['Authority'];
+            $this->url = $this->url_pay.$result['Authority'];
 
             return true;
         } else {
@@ -99,8 +99,8 @@ class Zarinpal
 
         $data = [
             'MerchantID' => $merchant_id,
-            'Amount' => $amount,
-            'Authority' => $authority,
+            'Amount'     => $amount,
+            'Authority'  => $authority,
         ];
 
         $result = $client->call('PaymentVerification', [$data]);
