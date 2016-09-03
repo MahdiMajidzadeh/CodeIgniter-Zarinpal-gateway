@@ -8,7 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author              Mahdi Majidzadeh (http://majidzadeh.ir)
  * @license             GNU Public License 2.0
  * @package             ZarinPal
-*/
+ */
 
 if (!class_exists('nusoap_client')) {
     require_once 'nusoap.php';
@@ -16,51 +16,31 @@ if (!class_exists('nusoap_client')) {
 
 class Zarinpal
 {
-    private $url;
     private $ERR;
+
     private $authority;
+
     private $refid;
 
-    private $url_wsdl;
-    private $url_pay;
+    private $url;
 
-    public function initialize()
+    private $url_pay = 'https://www.zarinpal.com/pg/StartPay/';
+
+    private $url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+
+    public function getAuthority()
     {
-        $url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
-        $url_pay = 'https://www.zarinpal.com/pg/StartPay/';
+        return $this->authority;
     }
 
-    public function request($merchant_id, $amount, $desc, $call_back, $mobile = null, $email = null)
+    public function getError()
     {
-        $client = new nusoap_client($this->url_wsdl, 'wsdl');
-        $client->soap_defencoding = 'UTF-8';
+        return $this->ERR;
+    }
 
-        $data = [
-            'MerchantID'     => $merchant_id,
-            'Amount'         => $amount,
-            'Description'    => $desc,
-            'CallbackURL'    => $call_back
-        ];
-
-        if ($mobile) {
-            $data['Mobile'] = $mobile;
-        }
-        if ($email) {
-            $data['Email'] = $email;
-        }
-
-        $result = $client->call('PaymentRequest', [$data]);
-        
-        if ($result['Status'] == 100) {
-            $this->authority = $result['Authority'];
-            $this->url = $this->url_pay.$result['Authority'];
-
-            return true;
-        } else {
-            $this->ERR = $result['Status'];
-
-            return false;
-        }
+    public function getRefId()
+    {
+        return $this->refid;
     }
 
     public function redirect()
@@ -73,14 +53,43 @@ class Zarinpal
         redirect($this->url);
     }
 
-    public function get_error()
+    public function request($merchant_id, $amount, $desc, $call_back, $mobile = null, $email = null)
     {
-        return $this->ERR;
+        $client = new nusoap_client($this->url_wsdl, 'wsdl');
+        $client->soap_defencoding = 'UTF-8';
+
+        $data = [
+            'MerchantID' => $merchant_id,
+            'Amount' => $amount,
+            'Description' => $desc,
+            'CallbackURL' => $call_back,
+        ];
+
+        if ($mobile) {
+            $data['Mobile'] = $mobile;
+        }
+        if ($email) {
+            $data['Email'] = $email;
+        }
+
+        $result = $client->call('PaymentRequest', [$data]);
+
+        if ($result['Status'] == 100) {
+            $this->authority = $result['Authority'];
+            $this->url = $this->url_pay . $result['Authority'];
+
+            return true;
+        } else {
+            $this->ERR = $result['Status'];
+
+            return false;
+        }
     }
 
-    public function get_authority()
+    public function sandbox()
     {
-        return $this->authority;
+        $this->url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
+        $this->url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
     }
 
     public function verify($merchant_id, $amount, $authority)
@@ -89,9 +98,9 @@ class Zarinpal
         $client->soap_defencoding = 'UTF-8';
 
         $data = [
-            'MerchantID'    => $merchant_id,
-            'Amount'        => $amount,
-            'Authority'     => $authority,
+            'MerchantID' => $merchant_id,
+            'Amount' => $amount,
+            'Authority' => $authority,
         ];
 
         $result = $client->call('PaymentVerification', [$data]);
@@ -105,16 +114,5 @@ class Zarinpal
 
             return false;
         }
-    }
-
-    public function get_ref_id()
-    {
-        return $this->refid;
-    }
-
-    public function sandbox()
-    {
-        $this->url_wsdl = 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
-        $this->url_pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
     }
 }
