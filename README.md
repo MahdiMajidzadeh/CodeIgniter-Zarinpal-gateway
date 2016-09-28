@@ -19,12 +19,12 @@ $this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $em
 Full code is:
 ```
 if($this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
-    $authority = $this->zarinpal->get_authority();
+    $authority = $this->zarinpal->getAuthority();
     // do database 
     $this->zarinpal->redirect();
 }
 else{
-    $error = $this->zarinpal->get_error();
+    $error = $this->zarinpal->getError();
 }
 ```
 For verify user payment:
@@ -35,11 +35,11 @@ Full code is:
 ```
 if($_GET['Status'] == 'OK'){
     if($this->zarinpal->verify($merchant_id , $amount, $authority)){
-        $refid = $this->zarinpal->get_ref_id();
+        $refid = $this->zarinpal->getRefId();
         // do database 
     }
     else{
-        $error = $this->zarinpal->get_error();
+        $error = $this->zarinpal->getError();
     }
 }
 else{
