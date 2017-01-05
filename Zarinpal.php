@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 
 if (!class_exists('nusoap_client')) {
-    require_once 'nusoap.php';
+    require_once 'nusoap/nusoap.php';
 }
 
 class Zarinpal
