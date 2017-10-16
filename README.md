@@ -13,12 +13,28 @@ $this->load->library('zarinpal');
 ```
 
 For sending user to gateway:
+- webgate (first show zarinpal page):
 ```
-$this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email);
+$this->zarinpal->webgate($merchant_id , $amount, $desc, $call_back, $mobile, $email);
 ```
+- zaringate (direct to bank page):
+```
+$this->zarinpal->zaringate($merchant_id , $amount, $desc, $gate, $call_back, $mobile, $email);
+```
+
+list of gate:
+| Name  | Bank  |
+|---|---|
+| zaringate | zarinpal choose bank |
+| asan | asan pardackt |
+| saman | saman |
+| sadad | melli |
+| parsian | parsian |
+| fanava | fanava tech |
+
 Full code is:
 ```
-if($this->zarinpal->request($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
+if($this->zarinpal->webgate($merchant_id , $amount, $desc, $call_back, $mobile, $email)){
     $authority = $this->zarinpal->getAuthority();
     // do database 
     $this->zarinpal->redirect();

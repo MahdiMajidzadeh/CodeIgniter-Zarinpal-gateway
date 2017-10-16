@@ -17,16 +17,19 @@ if (!class_exists('nusoap_client')) {
 class Zarinpal
 {
     private $ERR;
-
     private $authority;
-
     private $refid;
-
     private $url;
-
     private $url_pay = 'https://www.zarinpal.com/pg/StartPay/';
-
     private $url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+    private $zaringate = array(
+        'zaringate' => 'ZarinGat', 
+        'asan' => 'Asan', 
+        'saman' => 'Sep', 
+        'sadad' => 'Sad', 
+        'parsian' => 'Pec', 
+        'fanava' => 'Fan', 
+    );
 
     public function getAuthority()
     {
@@ -114,5 +117,18 @@ class Zarinpal
 
             return false;
         }
+    }
+
+    public function webgate($merchant_id, $amount, $desc, $call_back, $mobile = null, $email = null)
+    {
+        return $this->request($merchant_id, $amount, $desc, $call_back, $mobile , $email);
+    }
+
+    public function zaringate($merchant_id, $amount, $desc, $call_back, $gate = 'zaringate', $mobile = null, $email = null)
+    {
+        $result = $this->request($merchant_id, $amount, $desc, $call_back, $mobile , $email);
+        $this->url = $this->url_pay. $this->authority. '/'. $this->zaringate[$gate];
+
+        return $result;
     }
 }
