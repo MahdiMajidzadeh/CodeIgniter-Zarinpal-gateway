@@ -3,10 +3,10 @@
 
 Codeigniter library for Iranian gateway, [Zarinpal](https://www.zarinpal.com/)
 
-##how to install
-Copy `Zarinpal.php` and `nusoap.php` to `application/libraries` of your own project.
+## how to install
+Copy `Zarinpal.php` and `nusoap` directory to `application/libraries` of your own project.
 
-##how to use
+## how to use
 First, load library:
 ```
 $this->load->library('zarinpal');
@@ -23,6 +23,7 @@ $this->zarinpal->zaringate($merchant_id , $amount, $desc, $gate, $call_back, $mo
 ```
 
 list of gate:
+
 | Name  | Bank  |
 |---|---|
 | zaringate | zarinpal choose bank |
@@ -62,11 +63,11 @@ else{
     //use cancel payment
 }
 ```
-##Sandbox
+## Sandbox
 For test for script, you can turn on sandbox mode:
 ```
 $this->zarinpal->sandbox();
 ```
 
-##Contributor
+## Contributor
 - Mahdi Majidzadeh ([github](https://github.com/MahdiMajidzadeh))
