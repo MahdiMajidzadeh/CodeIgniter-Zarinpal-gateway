@@ -325,7 +325,7 @@ class nusoap_client extends nusoap_base
                     $this->appendDebug($this->varDump($return));
 
                     return $return;
-                // nothing returned (ie, echoVoid)
+                    // nothing returned (ie, echoVoid)
                 } else {
                     return '';
                 }
@@ -447,9 +447,9 @@ class nusoap_client extends nusoap_base
                 } elseif (preg_match('/^https/', $this->endpoint)) {
                     //} elseif(strpos($this->endpoint,'https:')){
                     //if(phpversion() == '4.3.0-dev'){
-                        //$response = $http->send($msg,$timeout,$response_timeout);
-                           //$this->request = $http->outgoing_payload;
-                        //$this->response = $http->incoming_payload;
+                    //$response = $http->send($msg,$timeout,$response_timeout);
+                    //$this->request = $http->outgoing_payload;
+                    //$this->response = $http->incoming_payload;
                     //} else
                     $this->responseData = $http->sendHTTPS($msg, $timeout, $response_timeout, $this->cookies);
                 } else {

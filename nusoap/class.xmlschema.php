@@ -812,28 +812,28 @@ class nusoap_xmlschema extends nusoap_base
     public function serializeTypeDef($type)
     {
         //print "in sTD() for type $type<br>";
-    if ($typeDef = $this->getTypeDef($type)) {
-        $str .= '<'.$type;
-        if (is_array($typeDef['attrs'])) {
-            foreach ($typeDef['attrs'] as $attName => $data) {
-                $str .= " $attName=\"{type = ".$data['type'].'}"';
+        if ($typeDef = $this->getTypeDef($type)) {
+            $str .= '<'.$type;
+            if (is_array($typeDef['attrs'])) {
+                foreach ($typeDef['attrs'] as $attName => $data) {
+                    $str .= " $attName=\"{type = ".$data['type'].'}"';
+                }
             }
-        }
-        $str .= ' xmlns="'.$this->schema['targetNamespace'].'"';
-        if (count($typeDef['elements']) > 0) {
-            $str .= '>';
-            foreach ($typeDef['elements'] as $element => $eData) {
-                $str .= $this->serializeTypeDef($element);
+            $str .= ' xmlns="'.$this->schema['targetNamespace'].'"';
+            if (count($typeDef['elements']) > 0) {
+                $str .= '>';
+                foreach ($typeDef['elements'] as $element => $eData) {
+                    $str .= $this->serializeTypeDef($element);
+                }
+                $str .= "</$type>";
+            } elseif ($typeDef['typeClass'] == 'element') {
+                $str .= "></$type>";
+            } else {
+                $str .= '/>';
             }
-            $str .= "</$type>";
-        } elseif ($typeDef['typeClass'] == 'element') {
-            $str .= "></$type>";
-        } else {
-            $str .= '/>';
-        }
 
-        return $str;
-    }
+            return $str;
+        }
 
         return false;
     }
@@ -862,7 +862,7 @@ class nusoap_xmlschema extends nusoap_base
 					<td><input type='text' name='parameters[".$name."][$childDef[name]]'></td></tr>";
                 }
                 $buffer .= '</table>';
-            // if array
+                // if array
             } elseif ($typeDef['phpType'] == 'array') {
                 $buffer .= '<table>';
                 for ($i = 0; $i < 3; $i++) {
@@ -871,7 +871,7 @@ class nusoap_xmlschema extends nusoap_base
 					<td><input type='text' name='parameters[".$name."][]'></td></tr>";
                 }
                 $buffer .= '</table>';
-            // if scalar
+                // if scalar
             } else {
                 $buffer .= "<input type='text' name='parameters[$name]'>";
             }

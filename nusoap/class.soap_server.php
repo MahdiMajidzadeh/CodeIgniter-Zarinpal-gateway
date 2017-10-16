@@ -264,10 +264,10 @@ class nusoap_server extends nusoap_base
             $this->debug('In service, this is a request for WSDL');
             if ($this->externalWSDLURL) {
                 if (strpos($this->externalWSDLURL, 'http://') !== false) { // assume URL
-                $this->debug('In service, re-direct for WSDL');
+                    $this->debug('In service, re-direct for WSDL');
                     header('Location: '.$this->externalWSDLURL);
                 } else { // assume file
-                $this->debug('In service, use file passthru for WSDL');
+                    $this->debug('In service, use file passthru for WSDL');
                     header("Content-Type: text/xml\r\n");
                     $pos = strpos($this->externalWSDLURL, 'file://');
                     if ($pos === false) {
@@ -626,7 +626,7 @@ class nusoap_server extends nusoap_base
                 $call_arg = [$class, $method];
             } else {
                 $this->debug('in invoke_method, calling instance method using call_user_func_array()');
-                $instance = new $class ();
+                $instance = new $class();
                 $call_arg = [&$instance, $method];
             }
             if (is_array($this->methodparams)) {
@@ -660,7 +660,7 @@ class nusoap_server extends nusoap_base
             return;
         } elseif ($this->methodreturnisliteralxml) {
             $return_val = $this->methodreturn;
-        // returned value(s)
+            // returned value(s)
         } else {
             $this->debug('got a(n) '.gettype($this->methodreturn).' from method');
             $this->debug('serializing return value');
@@ -727,7 +727,7 @@ class nusoap_server extends nusoap_base
         $this->result = 'successful';
         if ($this->wsdl) {
             //if($this->debug_flag){
-                $this->appendDebug($this->wsdl->getDebug());
+            $this->appendDebug($this->wsdl->getDebug());
             //	}
             if (isset($this->opData['output']['encodingStyle'])) {
                 $encodingStyle = $this->opData['output']['encodingStyle'];
@@ -886,7 +886,7 @@ class nusoap_server extends nusoap_base
         if ($err = $parser->getError()) {
             $this->result = 'fault: error in msg parsing: '.$err;
             $this->fault('SOAP-ENV:Client', "error in msg parsing:\n".$err);
-        // else successfully parsed request into soapval object
+            // else successfully parsed request into soapval object
         } else {
             // get/set methodname
             $this->methodURI = $parser->root_struct_namespace;
