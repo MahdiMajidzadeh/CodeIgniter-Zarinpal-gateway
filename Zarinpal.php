@@ -22,14 +22,14 @@ class Zarinpal
     private $url;
     private $url_pay = 'https://www.zarinpal.com/pg/StartPay/';
     private $url_wsdl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
-    private $zaringate = array(
-        'zaringate' => 'ZarinGat', 
-        'asan' => 'Asan', 
-        'saman' => 'Sep', 
-        'sadad' => 'Sad', 
-        'parsian' => 'Pec', 
-        'fanava' => 'Fan', 
-    );
+    private $zaringate = [
+        'zaringate' => 'ZarinGat',
+        'asan'      => 'Asan',
+        'saman'     => 'Sep',
+        'sadad'     => 'Sad',
+        'parsian'   => 'Pec',
+        'fanava'    => 'Fan',
+    ];
 
     public function getAuthority()
     {
@@ -121,13 +121,13 @@ class Zarinpal
 
     public function webgate($merchant_id, $amount, $desc, $call_back, $mobile = null, $email = null)
     {
-        return $this->request($merchant_id, $amount, $desc, $call_back, $mobile , $email);
+        return $this->request($merchant_id, $amount, $desc, $call_back, $mobile, $email);
     }
 
     public function zaringate($merchant_id, $amount, $desc, $call_back, $gate = 'zaringate', $mobile = null, $email = null)
     {
-        $result = $this->request($merchant_id, $amount, $desc, $call_back, $mobile , $email);
-        $this->url = $this->url_pay. $this->authority. '/'. $this->zaringate[$gate];
+        $result = $this->request($merchant_id, $amount, $desc, $call_back, $mobile, $email);
+        $this->url = $this->url_pay.$this->authority.'/'.$this->zaringate[$gate];
 
         return $result;
     }

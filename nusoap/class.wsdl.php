@@ -450,8 +450,8 @@ class wsdl extends nusoap_base
                     }
                     break;
             }
-        // set status
-        switch ($name) {
+            // set status
+            switch ($name) {
             case 'import':
                 if (isset($attrs['location'])) {
                     $this->import[$attrs['namespace']][] = ['location' => $attrs['location'], 'loaded' => false];
@@ -858,8 +858,8 @@ class wsdl extends nusoap_base
 				<ul>';
         foreach ($this->getOperations() as $op => $data) {
             $b .= "<li><a href='#' onclick=\"popout();popup('$op')\">$op</a></li>";
-                    // create hidden div
-                    $b .= "<div id='$op' class='hidden'>
+            // create hidden div
+            $b .= "<div id='$op' class='hidden'>
 				    <a href='#' onclick='popout()'><font color='#ffffff'>Close</font></a><br><br>";
             foreach ($data as $donnie => $marie) { // loop through opdata
                         if ($donnie == 'input' || $donnie == 'output') { // show input/output data
@@ -868,9 +868,9 @@ class wsdl extends nusoap_base
                                 if ($captain == 'parts') { // loop thru parts
                                     $b .= "&nbsp;&nbsp;$captain:<br>";
                                     //if(is_array($tenille)){
-                                        foreach ($tenille as $joanie => $chachi) {
-                                            $b .= "&nbsp;&nbsp;&nbsp;&nbsp;$joanie: $chachi<br>";
-                                        }
+                                    foreach ($tenille as $joanie => $chachi) {
+                                        $b .= "&nbsp;&nbsp;&nbsp;&nbsp;$joanie: $chachi<br>";
+                                    }
                                     //}
                                 } else {
                                     $b .= "&nbsp;&nbsp;$captain: $tenille<br>";

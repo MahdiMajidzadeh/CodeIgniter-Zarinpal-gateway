@@ -608,7 +608,7 @@ class nusoap_base
                         } else {
                             $type_str = ' xsi:type="SOAP-ENC:Array" SOAP-ENC:arrayType="'.$array_typename."[$array_type]\"";
                         }
-                    // empty array
+                        // empty array
                     } else {
                         if ($use == 'literal') {
                             $type_str = '';
@@ -672,17 +672,17 @@ class nusoap_base
     public function serializeEnvelope($body, $headers = false, $namespaces = [], $style = 'rpc', $use = 'encoded', $encodingStyle = 'http://schemas.xmlsoap.org/soap/encoding/')
     {
         // TODO: add an option to automatically run utf8_encode on $body and $headers
-    // if $this->soap_defencoding is UTF-8.  Not doing this automatically allows
-    // one to send arbitrary UTF-8 characters, not just characters that map to ISO-8859-1
+        // if $this->soap_defencoding is UTF-8.  Not doing this automatically allows
+        // one to send arbitrary UTF-8 characters, not just characters that map to ISO-8859-1
 
-    $this->debug('In serializeEnvelope length='.strlen($body).' body (max 1000 characters)='.substr($body, 0, 1000)." style=$style use=$use encodingStyle=$encodingStyle");
+        $this->debug('In serializeEnvelope length='.strlen($body).' body (max 1000 characters)='.substr($body, 0, 1000)." style=$style use=$use encodingStyle=$encodingStyle");
         $this->debug('headers:');
         $this->appendDebug($this->varDump($headers));
         $this->debug('namespaces:');
         $this->appendDebug($this->varDump($namespaces));
 
-    // serialize namespaces
-    $ns_string = '';
+        // serialize namespaces
+        $ns_string = '';
         foreach (array_merge($this->namespaces, $namespaces) as $k => $v) {
             $ns_string .= " xmlns:$k=\"$v\"";
         }
@@ -690,24 +690,24 @@ class nusoap_base
             $ns_string = " SOAP-ENV:encodingStyle=\"$encodingStyle\"$ns_string";
         }
 
-    // serialize headers
-    if ($headers) {
-        if (is_array($headers)) {
-            $xml = '';
-            foreach ($headers as $k => $v) {
-                if (is_object($v) && get_class($v) == 'soapval') {
-                    $xml .= $this->serialize_val($v, false, false, false, false, false, $use);
-                } else {
-                    $xml .= $this->serialize_val($v, $k, false, false, false, false, $use);
+        // serialize headers
+        if ($headers) {
+            if (is_array($headers)) {
+                $xml = '';
+                foreach ($headers as $k => $v) {
+                    if (is_object($v) && get_class($v) == 'soapval') {
+                        $xml .= $this->serialize_val($v, false, false, false, false, false, $use);
+                    } else {
+                        $xml .= $this->serialize_val($v, $k, false, false, false, false, $use);
+                    }
                 }
+                $headers = $xml;
+                $this->debug("In serializeEnvelope, serialized array of headers to $headers");
             }
-            $headers = $xml;
-            $this->debug("In serializeEnvelope, serialized array of headers to $headers");
+            $headers = '<SOAP-ENV:Header>'.$headers.'</SOAP-ENV:Header>';
         }
-        $headers = '<SOAP-ENV:Header>'.$headers.'</SOAP-ENV:Header>';
-    }
-    // serialize envelope
-    return
+        // serialize envelope
+        return
     '<?xml version="1.0" encoding="'.$this->soap_defencoding.'"?'.'>'.
     '<SOAP-ENV:Envelope'.$ns_string.'>'.
     $headers.
@@ -986,7 +986,7 @@ function iso8601_to_timestamp($datestr)
         }
 
         return gmmktime($regs[4], $regs[5], $regs[6], $regs[2], $regs[3], $regs[1]);
-//		return strtotime("$regs[1]-$regs[2]-$regs[3] $regs[4]:$regs[5]:$regs[6]Z");
+        //		return strtotime("$regs[1]-$regs[2]-$regs[3] $regs[4]:$regs[5]:$regs[6]Z");
     } else {
         return false;
     }
