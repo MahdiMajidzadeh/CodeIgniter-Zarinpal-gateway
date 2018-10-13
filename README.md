@@ -1,6 +1,8 @@
 # CodeIgniter-Zarinpal-gateway
 [![StyleCI](https://styleci.io/repos/57077375/shield)](https://styleci.io/repos/57077375)
 
+## This library not maintained eny more 
+
 Codeigniter library for Iranian gateway, [Zarinpal](https://www.zarinpal.com/)
 
 ## how to install
